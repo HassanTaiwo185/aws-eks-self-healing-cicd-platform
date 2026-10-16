@@ -9,3 +9,24 @@ resource "aws_ecr_repository" "app" {
     scan_on_push = true
   }
 }
+
+
+locals {
+  cluster_name = "${var.project_name}-eks"
+}
+
+# Eks networking
+module "networking" {
+  source       = "./modules/networking"
+  project_name = var.project_name
+  cluster_name = local.cluster_name
+}
+
+# EKS statefulness data
+module "data" {
+  source              = "./modules/data"
+  project_name        = var.project_name
+  database_subnet_ids = module.networking.database_subnet_ids
+  database_sg_id      = module.networking.database_sg_id
+  redis_sg_id         = module.networking.redis_sg_id
+}
