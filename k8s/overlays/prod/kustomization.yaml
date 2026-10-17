@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: collabsup
+
+resources:
+  - ../../base
+  - backend-config.yaml
+
+labels:
+  - pairs:
+      app.kubernetes.io/part-of: collabsup
+      app.kubernetes.io/managed-by: argocd
+
+# Jenkins updates these tags (kustomize edit set image). Do not edit by hand.
+images:
+  - name: 897154406243.dkr.ecr.us-east-1.amazonaws.com/cloudnative-backend
+    newTag: initial
+  - name: 897154406243.dkr.ecr.us-east-1.amazonaws.com/cloudnative-frontend
+    newTag: initial

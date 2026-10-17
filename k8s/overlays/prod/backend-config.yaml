@@ -1,0 +1,16 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+data:
+  DEBUG: "False"
+  DB_HOST: "cloudnative-postgres.cyv8auwy0hqf.us-east-1.rds.amazonaws.com"
+  DB_PORT: "5432"
+  DB_NAME: "appdb"
+  DB_USER: "appadmin"
+  REDIS_URL: "rediss://master.cloudnative-redis.cwchy1.use1.cache.amazonaws.com:6379/0"
+  CELERY_BROKER_URL: "rediss://master.cloudnative-redis.cwchy1.use1.cache.amazonaws.com:6379/0?ssl_cert_reqs=required"
+  # Update both once the ALB exists (kubectl get ingress -n collabsup)
+  FRONTEND_URL: "http://REPLACE_WITH_ALB_DNS"
+  ALLOWED_HOSTS: ".elb.amazonaws.com,localhost"

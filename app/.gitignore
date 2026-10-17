@@ -1,0 +1,23 @@
+# Virtual environment folder
+env/
+
+# Django database file
+db.sqlite3
+
+# Python cache files
+__pycache__/
+
+# Collected static files
+staticfiles/
+
+.vite/
+
+.env
+*.env
+
+.venv/
+*.pyc
+.git/
+
+node_modules/
+dist/

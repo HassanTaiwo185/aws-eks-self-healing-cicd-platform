@@ -1,0 +1,6 @@
+app/
+k8s/
+argocd/
+Jenkinsfile
+.git/
+.terraform/
