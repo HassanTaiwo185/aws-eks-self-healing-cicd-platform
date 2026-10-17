@@ -15,7 +15,7 @@ labels:
 images:
 - name: 897154406243.dkr.ecr.us-east-1.amazonaws.com/cloudnative-backend
   newName: 897154406243.dkr.ecr.us-east-1.amazonaws.com/cloudnative-backend
-  newTag: 1-67e1a09
+  newTag: 2-f4a43de
 - name: 897154406243.dkr.ecr.us-east-1.amazonaws.com/cloudnative-frontend
   newName: 897154406243.dkr.ecr.us-east-1.amazonaws.com/cloudnative-frontend
-  newTag: 1-67e1a09
+  newTag: 2-f4a43de
