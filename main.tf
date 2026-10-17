@@ -30,3 +30,12 @@ module "data" {
   database_sg_id      = module.networking.database_sg_id
   redis_sg_id         = module.networking.redis_sg_id
 }
+
+# EKS configuration 
+module "eks" {
+  source              = "./modules/eks"
+  project_name        = var.project_name
+  cluster_name        = local.cluster_name
+  private_subnet_ids  = module.networking.private_subnet_ids
+  node_instance_types = ["m7i-flex.large"]
+}
