@@ -10,9 +10,8 @@ pipeline {
         AWS_REGION     = 'us-east-1'
         BACKEND_REPO   = 'cloudnative-backend'
         FRONTEND_REPO  = 'cloudnative-frontend'
-        // Frontend build-time URLs. Update VITE_WS_URL once the EKS Ingress has a hostname.
+        VITE_WS_URL    = 'ws://k8s-collabsu-collabsu-f9e7369d20-115437088.us-east-1.elb.amazonaws.com/'
         VITE_API_URL   = '/api'
-        VITE_WS_URL    = 'wss://CHANGE_ME_AFTER_INGRESS/'
         TRIVY_VERSION  = '0.72.0'
         GITOPS_REPO    = 'github.com/HassanTaiwo185/aws-eks-self-healing-cicd-platform.git'
     }

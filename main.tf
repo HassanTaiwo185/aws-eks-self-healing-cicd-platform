@@ -10,6 +10,7 @@ resource "aws_ecr_repository" "app" {
 
   name                 = "${var.project_name}-${each.key}"
   image_tag_mutability = "IMMUTABLE"
+  force_delete         = true 
 
   image_scanning_configuration {
     scan_on_push = true
@@ -76,4 +77,16 @@ module "eks" {
   cluster_name        = local.cluster_name
   private_subnet_ids  = module.networking.private_subnet_ids
   node_instance_types = ["m7i-flex.large"]
+}
+
+
+module "addons" {
+  source            = "./modules/addons"
+  project_name      = var.project_name
+  cluster_name      = module.eks.cluster_name
+  vpc_id            = module.networking.vpc_id
+  oidc_provider_arn = module.eks.oidc_provider_arn
+  oidc_provider_url = module.eks.oidc_provider_url
+
+  depends_on = [module.eks] 
 }
