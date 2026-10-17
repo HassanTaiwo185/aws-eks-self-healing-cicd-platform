@@ -1,8 +1,11 @@
-
+# Non-secret settings. Secrets (DB_PASSWORD, SECRET_KEY, BREVO_API_KEY) live in
+# the "backend-secrets" Secret, which is NOT stored in Git.
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: backend-config
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"   # created first, before the migration job
 data:
   DEBUG: "False"
   DB_HOST: "cloudnative-postgres.cyv8auwy0hqf.us-east-1.rds.amazonaws.com"

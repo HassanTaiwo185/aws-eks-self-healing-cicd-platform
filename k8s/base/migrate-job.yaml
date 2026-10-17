@@ -1,10 +1,12 @@
-# Runs "manage.py migrate" before every Argo CD sync, so new code never meets an old schema
+# Runs "manage.py migrate" after the ConfigMap (wave -2) and before the
+# Deployments (wave 0), so new code never meets an old schema.
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: migrate
   annotations:
-    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/sync-wave: "-1"
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
 spec:
   backoffLimit: 2
