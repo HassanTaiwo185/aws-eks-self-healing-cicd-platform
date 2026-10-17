@@ -43,13 +43,18 @@ pipeline {
                     env.IMAGE_TAG = "${BUILD_NUMBER}-${sha}"
                 }
                 sh '''
+                    BUST=$(date +%Y-%m-%d)
+
                     docker build --pull --platform linux/amd64 \
+                      --build-arg APT_CACHE_BUST=$BUST \
                       -t ${BACKEND_REPO}:${IMAGE_TAG} ./app/backend
 
                     docker build --pull --platform linux/amd64 \
+                      --build-arg APK_CACHE_BUST=$BUST \
                       --build-arg VITE_API_URL=${VITE_API_URL} \
                       --build-arg VITE_WS_URL=${VITE_WS_URL} \
                       -t ${FRONTEND_REPO}:${IMAGE_TAG} ./app/frontend
+
                 '''
             }
         }
