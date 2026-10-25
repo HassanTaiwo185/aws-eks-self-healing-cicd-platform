@@ -15,5 +15,5 @@ data:
   REDIS_URL: "rediss://master.cloudnative-redis.cwchy1.use1.cache.amazonaws.com:6379/0"
   CELERY_BROKER_URL: "rediss://master.cloudnative-redis.cwchy1.use1.cache.amazonaws.com:6379/0?ssl_cert_reqs=required"
   # Update both once the ALB exists (kubectl get ingress -n collabsup)
-  FRONTEND_URL: "http://k8s-collabsu-collabsu-f9e7369d20-115437088.us-east-1.elb.amazonaws.com"
+  FRONTEND_URL: "ws://k8s-collabsu-collabsu-f9e7369d20-115437088.us-east-1.elb.amazonaws.com/"
   ALLOWED_HOSTS: ".elb.amazonaws.com,localhost"

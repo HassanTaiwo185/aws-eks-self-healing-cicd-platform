@@ -104,7 +104,7 @@ pipeline {
                 }
             }
         }
-        
+
 
         stage('Trivy Scan') {
             when { expression { env.SKIP_CI == 'false' } }
