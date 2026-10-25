@@ -104,27 +104,36 @@ pipeline {
                 }
             }
         }
+        
 
         stage('Trivy Scan') {
             when { expression { env.SKIP_CI == 'false' } }
             steps {
                 sh '''
                     for IMAGE in ${BACKEND_REPO} ${FRONTEND_REPO}; do
-      docker run --rm \
-        -v /var/run/docker.sock:/var/run/docker.sock \
-        -v trivy-cache:/root/.cache/ \
-        --volumes-from $(hostname) \
-        aquasec/trivy:${TRIVY_VERSION} image \
-        --timeout 15m \
-        --exit-code 1 \
-        --severity HIGH,CRITICAL \
-        --ignore-unfixed \
-        --ignorefile ${WORKSPACE}/.trivyignore \
-        ${IMAGE}:${IMAGE_TAG}
-    done
+                      CID=$(docker create \
+                        -v /var/run/docker.sock:/var/run/docker.sock \
+                        -v trivy-cache:/root/.cache/ \
+                        aquasec/trivy:${TRIVY_VERSION} image \
+                        --timeout 15m \
+                        --exit-code 1 \
+                        --severity HIGH,CRITICAL \
+                        --ignore-unfixed \
+                        --ignorefile /tmp/.trivyignore \
+                        ${IMAGE}:${IMAGE_TAG})
+
+                      docker cp .trivyignore $CID:/tmp/.trivyignore
+
+                      RC=0
+                      docker start -a $CID || RC=$?
+                      docker rm $CID > /dev/null
+                      [ "$RC" -eq 0 ] || exit $RC
+                    done
                 '''
             }
         }
+
+
 
         stage('ECR Login') {
             when { expression { env.SKIP_CI == 'false' } }
