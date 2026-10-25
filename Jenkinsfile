@@ -10,7 +10,7 @@ pipeline {
         AWS_REGION     = 'us-east-1'
         BACKEND_REPO   = 'cloudnative-backend'
         FRONTEND_REPO  = 'cloudnative-frontend'
-        VITE_WS_URL    = 'ws://k8s-collabsu-collabsu-f9e7369d20-115437088.us-east-1.elb.amazonaws.com/'
+        VITE_WS_URL = 'ws://k8s-collabsu-collabsu-f9e7369d20-1036275301.us-east-1.elb.amazonaws.com/'
         VITE_API_URL   = '/api'
         TRIVY_VERSION  = '0.72.0'
         GITOPS_REPO    = 'github.com/HassanTaiwo185/aws-eks-self-healing-cicd-platform.git'
