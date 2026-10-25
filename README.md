@@ -88,7 +88,6 @@ The private subnets are `/20` because the Amazon VPC CNI gives every pod its own
 ├── argocd/application.yaml     # Argo CD Application (auto-sync + self-heal)
 ├── Jenkinsfile                 # CI pipeline + GitOps hand-off
 ├── main.tf  provider.tf  variables.tf  outputs.tf
-└── terraform-provisioner-policy.json   # Least-privilege IAM policy for the Terraform user
 ```
 
 ---

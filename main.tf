@@ -79,7 +79,7 @@ module "eks" {
   node_instance_types = ["m7i-flex.large"]
 }
 
-
+# EKS Load balancer Controller
 module "addons" {
   source            = "./modules/addons"
   project_name      = var.project_name

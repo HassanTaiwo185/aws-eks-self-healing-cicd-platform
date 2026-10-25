@@ -1,0 +1,5 @@
+# Twisted DoS CVEs in XMPP/IRC/Telnet modules; Daphne uses only HTTP/WebSocket.
+# Fixed in 26.10.0rc1; remove once a stable 26.10.0 ships.
+CVE-2026-115775 exp:2026-12-31
+CVE-2026-115776 exp:2026-12-31
+CVE-2026-115778 exp:2026-12-31

@@ -110,16 +110,18 @@ pipeline {
             steps {
                 sh '''
                     for IMAGE in ${BACKEND_REPO} ${FRONTEND_REPO}; do
-                      docker run --rm \
-                        -v /var/run/docker.sock:/var/run/docker.sock \
-                        -v trivy-cache:/root/.cache/ \
-                        aquasec/trivy:${TRIVY_VERSION} image \
-                        --timeout 15m \
-                        --exit-code 1 \
-                        --severity HIGH,CRITICAL \
-                        --ignore-unfixed \
-                        ${IMAGE}:${IMAGE_TAG}
-                    done
+      docker run --rm \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        -v trivy-cache:/root/.cache/ \
+        --volumes-from $(hostname) \
+        aquasec/trivy:${TRIVY_VERSION} image \
+        --timeout 15m \
+        --exit-code 1 \
+        --severity HIGH,CRITICAL \
+        --ignore-unfixed \
+        --ignorefile ${WORKSPACE}/.trivyignore \
+        ${IMAGE}:${IMAGE_TAG}
+    done
                 '''
             }
         }
